@@ -1,0 +1,4 @@
+pip install tqdm==4.66.1
+pip install pyyaml==6.0.1
+pip install tensorboardX==2.9.0
+pip install opencv-python==4.8.1.78

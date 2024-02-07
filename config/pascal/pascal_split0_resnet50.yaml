@@ -1,0 +1,67 @@
+DATA:
+  data_root: ../data/Pascal-5i
+  base_data_root: ../data/Pascal-5i/base_annotation
+  train_list: lists/pascal/voc_sbd_merge_noduplicate.txt
+  val_list: lists/pascal/val.txt
+  classes: 2
+
+
+TRAIN:
+  # Aug
+  train_h: 473
+  train_w: 473
+  val_size: 473
+  scale_min: 0.9       # minimum random scale
+  scale_max: 1.1       # maximum random scale
+  rotate_min: -10      # minimum random rotate
+  rotate_max: 10       # maximum random rotate
+  ignore_label: 255
+  padding_label: 255
+  # Dataset & Mode
+  split: 0
+  shot: 1
+  data_set: 'pascal'
+  use_split_coco: False  # True means FWB setting
+  # Optimizer
+  batch_size: 8         # batch size for training
+  base_lr: 0.005        # scale x 10
+  epochs: 200
+  start_epoch: 0
+  stop_interval: 80
+  index_split: -1       # index for determining the params group with 10x learning rate
+  power: 0.9            # 0 means no decay
+  momentum: 0.9
+  weight_decay: 0.0001
+  warmup: False
+  # Viz & Save & Resume
+  print_freq: 10
+  save_freq: 10
+  resume: # path to latest checkpoint (default: none)
+  # Validate
+  evaluate: True
+  SubEpoch_val: True
+  fix_random_seed_val: True
+  batch_size_val: 1     # batch size for val
+  resized_val: True
+  ori_resize: False   # use original label for evaluation
+  # Else
+  workers: 8            # data loader workers
+  fix_bn: True
+  manual_seed: 321
+  seed_deterministic: False
+  zoom_factor: 8       # zoom factor for final prediction during training, be in [1, 2, 4, 8]
+
+Method:
+  layers: 50    
+  vgg: False
+  aux_weight: 1.0
+  low_fea: 'layer2'  # low_fea for computing the Gram matrix
+  kshot_trans_dim: 2 # K-shot dimensionality reduction
+  scales: [60, 30, 15, 8]
+  save_path: output/pascal/resnet50_split0
+
+Test_Finetune:
+  weight: # Path to the test model
+  ann_type: 'mask' # mask/bbox
+
+
