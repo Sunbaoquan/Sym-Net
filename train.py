@@ -16,7 +16,7 @@ from util.dataset import SemData
 import torch.distributed as dist
 from util.util import AverageMeter, poly_learning_rate, intersectionAndUnionGPU, check_makedirs, get_logger, \
     get_model_para_number, setup_seed, fix_bn
-from model.HPNet import HPNet
+from model.SymNet import SymNet
 from torch.utils.tensorboard import SummaryWriter
 
 cv2.ocl.setUseOpenCL(False)
@@ -41,7 +41,7 @@ def get_parser():
 
 
 def get_model(args):
-    model = HPNet(args, cls_type='Base')
+    model = SymNet(args, cls_type='Base')
     optimizer = model.get_optim(model, args)
 
     if hasattr(model, 'freeze_modules'):
@@ -191,7 +191,7 @@ def main():
     global max_iou, keep_epoch, filename
     max_iou = 0.
     keep_epoch = 0
-    filename = 'HPNet'
+    filename = 'SymNet'
 
     start_time = time.time()
 

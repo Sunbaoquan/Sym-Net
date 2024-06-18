@@ -208,9 +208,9 @@ def mask_feature(features, support_mask):
     return features
 
 
-class HPNet(nn.Module):
+class SymNet(nn.Module):
     def __init__(self, args, cls_type=None):
-        super(HPNet, self).__init__()
+        super(SymNet, self).__init__()
         assert args.classes > 1
         assert args.shot in [1, 5, 10, 20]
         assert args.data_set in ['pascal', 'coco']
@@ -275,7 +275,7 @@ class HPNet(nn.Module):
         self.bottleneck_ids = reduce(add, list(map(lambda x: list(range(x)), nbottlenecks)))
         self.lids = reduce(add, [[i + 1] * x for i, x in enumerate(nbottlenecks)])
         self.stack_ids = torch.tensor(self.lids).bincount().__reversed__().cumsum(dim=0)[:3]
-        # ------------------------PFENet-------------------
+
         self.cls = nn.Sequential(
             nn.Conv2d(reduce_dim, reduce_dim, kernel_size=3, padding=1, bias=False),
             nn.ReLU(inplace=True),
@@ -343,10 +343,8 @@ class HPNet(nn.Module):
             ))
         self.alpha_conv = nn.ModuleList(self.alpha_conv)
 
-        # --------------------Mutil-Sim-----------------------
         self.hyper_final = TDC(in_channels=nbottlenecks[1:], out_channels=48)
 
-        # ------------------------------BAM----------------------
         # Gram and Meta
         self.gram_merge = nn.Conv2d(2, 1, kernel_size=1, bias=False)
         self.gram_merge.weight = nn.Parameter(torch.tensor([[1.0], [0.0]]).reshape_as(self.gram_merge.weight))
@@ -511,7 +509,6 @@ class HPNet(nn.Module):
 
         general_prototype = 0.5 * query_text.unsqueeze(-1).unsqueeze(-1) + 0.5 * supp_text.unsqueeze(-1).unsqueeze(-1)
 
-        # ---------------- FEM ----------------------
         out_list = []
         pyramid_feat_list = []
         for idx, tmp_bin in enumerate(self.pyramid_bins):

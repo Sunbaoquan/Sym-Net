@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 from util import config, transform_tri, transform
 from util.util import AverageMeter, intersectionAndUnionGPU, check_makedirs, get_logger, setup_seed, \
     get_model_para_number
-from model.HPNet import HPNet
+from model.SymNet import SymNet
 from util.dataset import SemData
 
 cv2.ocl.setUseOpenCL(False)
@@ -34,7 +34,7 @@ def get_parser():
 
 
 def get_model(args):
-    model = HPNet(args, cls_type='Base')
+    model = SymNet(args, cls_type='Base')
     optimizer = model.get_optim(model, args)
     model = model.cuda()
     if args.weight:
