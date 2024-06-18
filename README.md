@@ -33,7 +33,7 @@ We follow the data_list generation approach of [PFENet](https://github.com/dvlab
 
 ## Models
 
-We have adopted the same procedures as [BAM](https://github.com/chunbolang/BAM) for the [pre-trained backbones](https://mycuhk-my.sharepoint.com/:f:/r/personal/1155186045_link_cuhk_edu_hk/Documents/HDMNet?csf=1&web=1&e=pXqNWC), placing them in the `./initmodel` directory. At the same time, we've also shared the [trained checkpoints](https://drive.google.com/drive/folders/1-YPZYhYQdHbfdhixWMS1UU31XJ822ECC?usp=sharing) of HPNet for everyone to replicate the results presented in our paper. Due to variations in environments and settings, there might be differences in experimental outcomes. Particularly on the PASCAL-$5^i$ dataset, there might be significant fluctuations in results, potentially resulting in an error of around 1%. This phenomenon is less influenced on the COCO-$20^i$ dataset.
+We have adopted the same procedures as [BAM](https://github.com/chunbolang/BAM) for the [pre-trained backbones](https://mycuhk-my.sharepoint.com/:f:/r/personal/1155186045_link_cuhk_edu_hk/Documents/HDMNet?csf=1&web=1&e=pXqNWC), placing them in the `./initmodel` directory. At the same time, we've also shared the [trained checkpoints](https://drive.google.com/drive/folders/1-YPZYhYQdHbfdhixWMS1UU31XJ822ECC?usp=sharing) of Sym-Net for everyone to replicate the results presented in our paper. Due to variations in environments and settings, there might be differences in experimental outcomes. Particularly on the PASCAL-$5^i$ dataset, there might be significant fluctuations in results, potentially resulting in an error of around 1%. This phenomenon is less influenced on the COCO-$20^i$ dataset.
 
 ## Scripts
 
